@@ -17,22 +17,48 @@ pub fn crawl_website(user_input: &str) {
     // Make a note of any URLs it contains
     // GOTO 1 (for the new URLs I’ve found)
 
+    // keep track of visited and non visited urls 
+    let mut visited_urls = HashSet::new();
+    // non visited urls
+    let mut to_visit_url = HashSet::new();
+
+    to_visit_url.insert(user_input.to_string());    
+
+
     let client = reqwest::blocking::Client::new();
 
-    let mut result = client.get(user_input).send().unwrap();
-    println!("{}", result.status());
+    while let Some(url) = to_visit_url.iter().next().cloned() {
+        // because now its visited, remove from to_visit
+        to_visit_url.remove(&url);
 
-    let mut body = String::new();
+        // continue 
+        if visited_urls.contains(&url) {
+            continue;
+        }
+        
+        let result = client.get(&url).send();
 
-    result.read_to_string(&mut body).unwrap();
-    println!("{}", body);
-    println!("Hello, world!");
+        if let Ok(mut resp) = result {
+            let mut body = String::new();
+             resp.read_to_string(&mut body).unwrap();
+            println!("{}", body);
+            // println!("Hello, world!");
 
-    // Document::from(body.as_str()).find(Name("a")).filter_map(|n| n.attr("href")).for_each(|x| println!("{}", x));
-    let unique_urls = Document::from(body.as_str()).find(Name("a")).filter_map(|n| n.attr("href")).map(str::to_string)
-    .collect::<HashSet<String>>();
+            // Document::from(body.as_str()).find(Name("a")).filter_map(|n| n.attr("href")).for_each(|x| println!("{}", x));
+            let unique_urls = Document::from(body.as_str()).find(Name("a")).filter_map(|n| n.attr("href")).map(str::to_string)
+            .collect::<HashSet<String>>();
 
-    println!("{:#?}", unique_urls);
+            for link in unique_urls {
+                if !visited_urls.contains(&link) {
+                    to_visit_url.insert(link);
+                }
+            }
+
+            visited_urls.insert(url);
+            // println!("{:#?}", unique_urls);
+        }
+        println!("All visited urls, {:#?}", visited_urls);
+    }
 
     
 }

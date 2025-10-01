@@ -3,6 +3,7 @@
 
 use std::io;
 mod crawler;
+mod search;
 
 fn main() {
     // user input variable
