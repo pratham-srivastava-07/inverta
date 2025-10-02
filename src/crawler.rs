@@ -29,7 +29,7 @@ pub fn crawl_website(user_input: &str) -> HashMap<String, String> {
 
     let client = reqwest::blocking::Client::new();
 
-    let max_pages = 3;
+    let max_pages = 50;
 
     while let Some(url) = to_visit_url.iter().next().cloned() {
         // because now its visited, remove from to_visit
