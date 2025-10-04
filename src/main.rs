@@ -2,9 +2,11 @@
 // STEP 1: BUILD A MACHINE THAT CAN DOWNLOAD THE ENTIRE WEB 
 
 use std::{io};
+
 mod crawler;
 mod search;
 mod utils;
+mod indexer;
 
 fn main() {
     // user input variable
@@ -16,8 +18,12 @@ fn main() {
     io::stdin()
     .read_line(&mut new_url).expect("error occured while accepting a url from user");
 
-    let result = crawler::crawl_website(&new_url);
-    // println!("Indexed {} pages", result.len())
+    // crawl_website returns HashMap<String, String> (url -> text)
+    let pages = crawler::crawl_website(&new_url.trim());
+
+    // Build an inverted index + TF-IDF scores from crawled pages
+    // indexer.build_index returns a SearchEngine (contains inverted index and metadata)
+    let engine = indexer::build_index(&pages);
 
     // starting a search loop 
     loop {
@@ -30,14 +36,15 @@ fn main() {
             break;
         }
 
-        let results = search::search_query(query, &result);
+        // now search using the search module which uses the built engine
+        let results = search::search_query(query, &engine);
         if results.is_empty() {
             println!("No results found.");
         } else {
             println!("Results:");
-            for url in results {
-                println!("- {}", url);
+            for (url, score) in results {
+                println!("- {} (score: {:.4})", url, score);
             }
+        }
     }
-  }
 }

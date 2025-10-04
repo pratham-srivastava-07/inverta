@@ -3,6 +3,8 @@ use std::io::Read;
 use select::document::Document;
 use select::predicate::{Name, Text};
 
+use crate::utils::_normalize_link;
+
 // fn get_links_from_html(html: String) -> HashSet<String>  {
 //      Document::from(html.as_str())
 //         .find(Name("a"))
@@ -47,7 +49,7 @@ pub fn crawl_website(user_input: &str) -> HashMap<String, String> {
         let result = client.get(&url).send();
 
         if let Ok(mut resp) = result {
-            // 🔹 FIX: read as bytes, then safely convert to UTF-8
+            // read as bytes, then safely convert to UTF-8
             let mut bytes = Vec::new();
             if resp.read_to_end(&mut bytes).is_ok() {
                 let body = String::from_utf8_lossy(&bytes).to_string();
@@ -74,6 +76,11 @@ pub fn crawl_website(user_input: &str) -> HashMap<String, String> {
                     if !visited_urls.contains(&link) {
                         to_visit_url.insert(link);
                     }
+                    // if let Some(full_url) = _normalize_link(&url, &link) {
+                    //     if !visited_urls.contains(&full_url)  {
+                    //         to_visit_url.insert(full_url);
+                    //     }
+                    // }
                 }
 
                 visited_urls.insert(url);
