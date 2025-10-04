@@ -7,6 +7,7 @@ use crate::utils::{tokenize, stopwords, _normalize_link};
 #[derive(Debug)]
 pub struct SearchEngine {
     pub inverted: HashMap<String, Vec<(String, f64)>>,
+    #[warn(dead_code)]
     pub doc_count: usize,
 }
 

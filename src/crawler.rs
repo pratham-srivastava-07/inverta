@@ -3,8 +3,6 @@ use std::io::Read;
 use select::document::Document;
 use select::predicate::{Name, Text};
 
-use crate::utils::_normalize_link;
-
 // fn get_links_from_html(html: String) -> HashSet<String>  {
 //      Document::from(html.as_str())
 //         .find(Name("a"))
