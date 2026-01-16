@@ -542,6 +542,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "inverta"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "regex",
+ "reqwest",
+ "select",
+ "serde",
+ "serde_json",
+ "url",
+]
+
+[[package]]
 name = "ipnet"
 version = "2.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2077,19 +2090,6 @@ dependencies = [
  "quote",
  "syn 2.0.106",
  "synstructure",
-]
-
-[[package]]
-name = "zephyr"
-version = "0.1.0"
-dependencies = [
- "lazy_static",
- "regex",
- "reqwest",
- "select",
- "serde",
- "serde_json",
- "url",
 ]
 
 [[package]]

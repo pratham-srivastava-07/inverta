@@ -1,5 +1,5 @@
 [package]
-name = "zephyr"
+name = "inverta"
 version = "0.1.0"
 edition = "2021"
 authors = ["Pratham Srivastava <github: github.com/pratham-srivastava-07>"]

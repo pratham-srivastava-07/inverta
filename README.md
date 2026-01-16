@@ -1,6 +1,6 @@
-# Zephyr
+# Inverta
 
-**Zephyr** is a basic search engine written in Rust. It allows you to crawl websites, index their content using TF-IDF, and perform search queries against the indexed data.
+**Inverta** is a basic search engine written in Rust. It allows you to crawl websites, index their content using TF-IDF, and perform search queries against the indexed data.
 
 ## Features
 
@@ -13,8 +13,8 @@
 Ensure you have Rust and Cargo installed.
 
 ```bash
-git clone https://github.com/pratham-srivastava-07/Zephyr.git
-cd Zephyr
+git clone https://github.com/pratham-srivastava-07/Inverta.git
+cd Inverta
 cargo build --release
 ```
 
