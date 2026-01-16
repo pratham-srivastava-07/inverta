@@ -1,7 +1,12 @@
 [package]
-name = "search-engine"
+name = "zephyr"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Pratham Srivastava <github: github.com/pratham-srivastava-07>"]
+description = "A basic search engine that downloads pages and matches your search query against their contents."
+repository = "https://github.com/pratham-srivastava-07/Zephyr"
+license = "MIT"
+readme = "README.md"
 
 [dependencies]
 reqwest = { version = "0.12", features = ["blocking", "rustls-tls"] }
@@ -10,4 +15,4 @@ url = "2.4"
 regex = "1.9"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-lazy_static = "1"
+lazy_static = "1.4"
